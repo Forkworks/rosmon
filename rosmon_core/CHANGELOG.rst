@@ -2,6 +2,49 @@
 Changelog for package rosmon_core
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.2.1 (2019-11-08)
+------------------
+* correctly terminate execvp() arguments (issue: #102, PR: #103).
+  Curiously, this bug has remained hidden until now.
+* Contributors: Max Schwarz
+
+2.2.0 (2019-10-29)
+------------------
+* ui: adjust "faded" crashed color
+  This makes the selected node more visible if it is a crashed one.
+* terminal: new input system that hides known escape codes
+  The old system would pass through all escape codes and generate
+  *additional* SK\_* events whenever a complete escape code was recognized.
+  The new system hides those events, but will yield incomplete escape codes
+  after a timeout (this is useful for supporting the escape key itself).
+* ui: line wrap for node output
+* node_monitor: Log manual start/stop actions
+* colored log output from rosmon itself
+* improved support for running under tmux and screen
+* UI modernization (PR: #99) with new colors, redesigned status bar
+* Interactive node search (PR: #97)
+* Add restart count to ROS diagnostics (PR: #96)
+* monitor: make updateStats() rate-independent (Issue: #95)
+* Contributors: Max Schwarz, Tim Clephas
+
+2.1.1 (2019-07-09)
+------------------
+* rosmon_core: add _shim to installed targets, issue #91
+* Contributors: Max Schwarz
+
+2.1.0 (2019-06-25)
+------------------
+* monitor: make fork() operation safe using external shim, PR #89
+* launch: handle lowercase true/false in $(eval), PR #86
+* launch: trim & simplify whitespace in subst contexts, PR #85
+* monitor: remove `exists` check for /proc/.../stat, PR #82
+* monitor: publish ROS diagnostics, PR #76
+* ros_interface: handle namespaces correctly, PRs #78, #80
+* launch: parse uppercase bool params, PR #79
+* ui: muting/unmuting of individual nodes, PR #73
+* cmake: add dependency for catkin_make builds, PR #75
+* Contributors: Adrien BARRAL, Artur Miller, Cartoonman, Christian Jülg, David Walsh, Eric Fang, Max Schwarz
+
 2.0.2 (2019-03-12)
 ------------------
 * rosmon_core: add tinyxml dependency to package.xml

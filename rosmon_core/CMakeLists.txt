@@ -15,7 +15,10 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package()
 include_directories(${catkin_INCLUDE_DIRS})
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Werror")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Werror -Wl,-rpath,${TX2_ROOT_PATH}/usr/lib/aarch64-linux-gnu -Wl,-rpath,${TX2_ROOT_PATH}/lib/aarch64-linux-gnu")
+set(Boost_INCLUDE_DIRS  ${TX2_ROOT_PATH}/usr/include/boost)
+set(Boost_LIBRARIES  ${TX2_ROOT_PATH}/usr/lib/aarch64-linux-gnu)
+message("[ROSMON_CORE] ld library path: ${LD_LIBRARY_PATH}")
 
 find_package(TinyXML REQUIRED)
 
@@ -32,6 +35,7 @@ if(PYTHONLIBS_FOUND)
 else()
 	message(WARNING "Please install libpython-dev (or equivalent) for $(eval ...) support")
 endif()
+
 
 find_package(Boost REQUIRED COMPONENTS python REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
@@ -58,7 +62,8 @@ add_library(rosmon_launch_config
 	src/launch/substitution.cpp
 	src/launch/substitution_python.cpp
 	src/launch/yaml_params.cpp
-        src/launch/bytes_parser.cpp
+	src/launch/bytes_parser.cpp
+	src/launch/string_utils.cpp
 	src/package_registry.cpp
 )
 target_link_libraries(rosmon_launch_config
@@ -67,6 +72,13 @@ target_link_libraries(rosmon_launch_config
 	${Boost_LIBRARIES}
 	${Python_LIBRARIES}
 	yaml-cpp
+)
+
+add_executable(_shim
+	src/monitor/shim.cpp
+)
+target_link_libraries(_shim
+	util
 )
 
 add_executable(rosmon

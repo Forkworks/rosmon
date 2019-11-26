@@ -2,6 +2,28 @@
 Changelog for package rqt_rosmon
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.2.1 (2019-11-08)
+------------------
+
+2.2.0 (2019-10-29)
+------------------
+* rqt_rosmon: use std::sort() instead of qSort()
+  qSort() is deprecated in newer Qt versions.
+* rqt_rosmon: node_model: fix dataChanged() column indices
+  Column indices are end-inclusive, so we should give COL_COUNT-1. This
+  fixes an issue where the table view would not update on new data.
+* Contributors: Max Schwarz
+
+2.1.1 (2019-07-09)
+------------------
+
+2.1.0 (2019-06-25)
+------------------
+* handle namespaces in service calls correctly, PR #80
+* show node namespaces, PR #78
+* add dependencies for catkin_make builds, PR #75
+* Contributors: Artur Miller, Adrien BARRAL, David Walsh, Eric Fang, Max Schwarz
+
 2.0.2 (2019-03-12)
 ------------------
 

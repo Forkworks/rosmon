@@ -2,6 +2,21 @@
 Changelog for package rosmon
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.2.1 (2019-11-08)
+------------------
+
+2.2.0 (2019-10-29)
+------------------
+
+2.1.1 (2019-07-09)
+------------------
+
+2.1.0 (2019-06-25)
+------------------
+* Handle namespaces in service calls correctly, PR #80
+* Add namespaces to status topics, PR #78
+* Contributors: Artur Miller, David Walsh, Max Schwarz
+
 2.0.2 (2019-03-12)
 ------------------
 

@@ -20,13 +20,13 @@ std::string memoryToString(uint64_t memory)
 	if(memory < static_cast<uint64_t>(1<<10))
 		return fmt::format("{} B", memory);
 	else if(memory < static_cast<uint64_t>(1<<20))
-		return fmt::format("{:.2f} KiB", static_cast<double>(memory / static_cast<uint64_t>(1<<10)));
+		return fmt::format("{:.2f} KiB", static_cast<double>(memory) / static_cast<uint64_t>(1<<10));
 	else if(memory < static_cast<uint64_t>(1<<30))
-		return fmt::format("{:.2f} MiB", static_cast<double>(memory / static_cast<uint64_t>(1<<20)));
+		return fmt::format("{:.2f} MiB", static_cast<double>(memory) / static_cast<uint64_t>(1<<20));
 	else if(memory < static_cast<uint64_t>(1ull<<40))
-		return fmt::format("{:.2f} GiB", static_cast<double>(memory / static_cast<uint64_t>(1ull<<30)));
+		return fmt::format("{:.2f} GiB", static_cast<double>(memory) / static_cast<uint64_t>(1ull<<30));
 	else
-		return fmt::format("{:.2f} TiB", static_cast<double>(memory / static_cast<uint64_t>(1ull<<40)));
+		return fmt::format("{:.2f} TiB", static_cast<double>(memory) / static_cast<uint64_t>(1ull<<40));
 }
 
 }
@@ -68,6 +68,10 @@ void DiagnosticsPublisher::publish(const std::vector<NodeMonitor::Ptr>& state)
 		kv.value = memoryToString(nodeState->memory());
 		nodeStatus.values.push_back(kv);
 
+		kv.key = "restart count";
+		kv.value = std::to_string(nodeState->restartCount());
+		nodeStatus.values.push_back(kv);
+
 		// Apply the operation level rule :
 		// If process is CRASHED => ERROR
 		// If process has been automatically restarted => WARN
@@ -84,7 +88,7 @@ void DiagnosticsPublisher::publish(const std::vector<NodeMonitor::Ptr>& state)
 			if(nodeState->restartCount() > 0)
 			{
 				nodeStatus.level = diagnostic_msgs::DiagnosticStatus::WARN;
-				msg = "restart count > 0!";
+				msg = "restart count > 0! (" + std::to_string(nodeState->restartCount()) + ")";
 			}
 
 			if(nodeState->memory() > nodeState->memoryLimit())
