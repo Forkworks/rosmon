@@ -29,8 +29,10 @@ endif()
 
 # Find Qt
 if(USE_QT5)
-	find_package(Qt5Widgets REQUIRED)
-	set(QT_FOUND ${Qt5Widgets_FOUND})
+    #find_package(Qt5Widgets REQUIRED)
+    find_package(Qt5Widgets 5.10.1 EXACT REQUIRED PATHS /usr/local/Qt-5.10.1/lib/cmake/Qt5Widgets)
+
+    set(QT_FOUND ${Qt5Widgets_FOUND})
 	set(QT_LIBRARIES ${Qt5Widgets_LIBRARIES})
 else()
 	find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
