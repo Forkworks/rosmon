@@ -51,8 +51,10 @@ message("[RQT_ROSMON] Boost lib path: ${Boost_LIBRARIES}")
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-link_directories(${TX2_ROOT_PATH}/usr/lib/aarch64-linux-gnu)
-link_directories(${TX2_ROOT_PATH}/lib/aarch64-linux-gnu)
+if(CROSSCOMPILE)
+	link_directories(${TX2_ROOT_PATH}/usr/lib/aarch64-linux-gnu)
+	link_directories(${TX2_ROOT_PATH}/lib/aarch64-linux-gnu)
+endif()
 
 set(UI_FILES
 	src/mon_gui.ui

@@ -15,10 +15,14 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package()
 include_directories(${catkin_INCLUDE_DIRS})
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Werror -Wl,-rpath,${TX2_ROOT_PATH}/usr/lib/aarch64-linux-gnu -Wl,-rpath,${TX2_ROOT_PATH}/lib/aarch64-linux-gnu")
-set(Boost_INCLUDE_DIRS  ${TX2_ROOT_PATH}/usr/include/boost)
-set(Boost_LIBRARIES  ${TX2_ROOT_PATH}/usr/lib/aarch64-linux-gnu)
-message("[ROSMON_CORE] ld library path: ${LD_LIBRARY_PATH}")
+if(CROSSCOMPILE)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Werror -Wl,-rpath,${TX2_ROOT_PATH}/usr/lib/aarch64-linux-gnu -Wl,-rpath,${TX2_ROOT_PATH}/lib/aarch64-linux-gnu")
+	set(Boost_INCLUDE_DIRS  ${TX2_ROOT_PATH}/usr/include/boost)
+	set(Boost_LIBRARIES  ${TX2_ROOT_PATH}/usr/lib/aarch64-linux-gnu)
+	message("[ROSMON_CORE] ld library path: ${LD_LIBRARY_PATH}")
+else()
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Werror")
+endif()
 
 find_package(TinyXML REQUIRED)
 
