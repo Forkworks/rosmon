@@ -33,7 +33,6 @@ if(USE_QT5)
     find_package(Qt5Widgets 5.10.1 EXACT REQUIRED PATHS /usr/local/qt5_10_1/lib/cmake/Qt5Widgets)
 
     set(QT_FOUND ${Qt5Widgets_FOUND})
-	message("[ROSMON_CORE] rootfs path:" ${TX2_ROOT_PATH})
     #set(Qt5_DIR ${TX2_ROOT_PATH}/usr/local/qt5_10_1/lib/cmake/Qt5)
     #find_package(Qt5 COMPONENTS Widgets REQUIRED )
 	set(QT_LIBRARIES ${Qt5Widgets_LIBRARIES})
@@ -45,9 +44,6 @@ endif()
 if(NOT QT_FOUND)
 	message(FATAL_ERROR "Could not find Qt!")
 endif()
-
-message("[RQT_ROSMON] Catkin lib path: ${catkin_LIBRARIES}")
-message("[RQT_ROSMON] Boost lib path: ${Boost_LIBRARIES}")
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
