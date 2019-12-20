@@ -30,7 +30,7 @@ endif()
 # Find Qt
 if(USE_QT5)
     #find_package(Qt5Widgets REQUIRED)
-    find_package(Qt5Widgets 5.10.1 EXACT REQUIRED PATHS /usr/local/qt5_10_1/lib/cmake/Qt5Widgets)
+    find_package(Qt5Widgets 5.10.1 EXACT REQUIRED PATHS ${TX2_ROOT_PATH}/usr/local/qt5_10_1/lib/cmake/Qt5Widgets)
 
     set(QT_FOUND ${Qt5Widgets_FOUND})
     #set(Qt5_DIR ${TX2_ROOT_PATH}/usr/local/qt5_10_1/lib/cmake/Qt5)
