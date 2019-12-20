@@ -48,8 +48,8 @@ endif()
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 if(CROSSCOMPILE)
-	link_directories(${TX2_ROOT_PATH}/usr/lib/aarch64-linux-gnu)
-	link_directories(${TX2_ROOT_PATH}/lib/aarch64-linux-gnu)
+	link_directories(${TX2_ROOT_PATH}/usr/lib/${CMAKE_LIBRARY_ARCHITECTURE})
+	link_directories(${TX2_ROOT_PATH}/lib/${CMAKE_LIBRARY_ARCHITECTURE})
 endif()
 
 set(UI_FILES
